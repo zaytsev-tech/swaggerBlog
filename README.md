@@ -1,2 +1,2 @@
 # swaggerBlog
-CRUD Posts, authorization, registragion with API L5 Swagger UI
+CRUD Posts, authorization, registration with API L5 Swagger UI
