@@ -1,16 +1,29 @@
-import React from 'react';
+import Cookies from 'js-cookie';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {getUser} from './actions/repos';
+import {getUser, logOut, getPosts} from './actions/repos';
+import CreatePostModal from './CreatePost';
 import './header.less';
 
 const Header = () => {
-    let user = '';
-    getUser().then(res => {user = res});
-        if(user != false) {
+    let token = getUser();
+    const [user, setUser] = useState(token);
+    const [modalActive, setModalActive] = useState(false);
+    const dispatcher = useDispatch();
+    useEffect(() => {
+        dispatcher(getPosts());
+        setUser(token);
+    }, [token]);
+    function emptyToken() {
+        setUser('');
+    }
+        if(user != '') {
             return (
             <div className='header'>
-                <button>Создать пост</button>
-                <button>Выйти</button>
+                <CreatePostModal active={modalActive} setActive={setModalActive} />
+                <button onClick={() => setModalActive(true)}>Создать пост</button>
+                <button onClick={() => {logOut(); emptyToken()}}>Выйти</button>
             </div>)
         } else {
             return (

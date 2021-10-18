@@ -31,7 +31,9 @@ const Registration = () => {
                     "Content-Type" : "application/json",
                 }
             })
-              .then(res => {console.log('response:' + res); setME('')})
+              .then(res => {
+                  setME('');
+                  window.location.assign('http://localhost:3000/')})
               .catch(err => {setME(err.response.data.message)});
     }
 

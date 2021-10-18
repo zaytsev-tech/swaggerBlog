@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './login.less';
+import Cookies from 'js-cookie';
 
 const Login = () => {
 
     const [messageError, setME] = useState('');
+
+    if(Cookies.get('token')) {
+        window.location.assign('http://localhost:3000/');
+    }
 
     function onSubmitLogin(e) {
         e.preventDefault();
@@ -24,7 +29,10 @@ const Login = () => {
                     "Content-Type" : "application/json",
                 }
             })
-              .then(res => {console.log('response:' + res); setME('')})
+              .then(res => {
+                  Cookies.set('token', res.data.token);
+                  window.location.assign('http://localhost:3000/');
+                  setME('')})
               .catch(err => {setME(err.response.data.message)});
     }
 
