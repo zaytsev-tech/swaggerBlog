@@ -7,7 +7,6 @@ const Post = (props) => {
     const post = props.post;
     const user = props.user;
     const dispatcher = useDispatch();
-
     function updateContent() {
         dispatcher(getPosts());
     }

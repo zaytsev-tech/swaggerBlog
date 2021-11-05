@@ -1,12 +1,13 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { setPosts } from '../../reducers/reposReducer';
+import { useDispatch } from 'react-redux';
+import { setLogin, setPosts } from '../../reducers/reposReducer';
 
 export const getUser = () => {
-    const [token, setToken] = useState('');
-    let user = Cookies.get('token');
-
+    const [token, setToken] = useState(Cookies.get('token'));
+    const dispatcher = useDispatch();
+    //let user = Cookies.get('token');
     useEffect(() => {
         if(!token) {
             getToken();
@@ -20,17 +21,19 @@ export const getUser = () => {
                 url: "https://test.flcd.ru/api/user/self",
                 headers: {
                     "accept" : "*/*",
-                    "Authorization" : "Bearer " + user,
+                    "Authorization" : "Bearer " + token,
                 }
             });
             let data = await response.data;
             setToken(data);
     }
-    return token;
+    return dispatcher(setLogin(token));
 }
 
 export const logOut = () => {
     Cookies.remove('token');
+    const dispatcher = useDispatch();
+    return dispatcher(setLogin(''));
 }
 
 export const getPosts = () => {
