@@ -1,6 +1,6 @@
 import { BoardPlace } from './components/board';
-import { LoginForm } from './components/login/index';
-import { StorProvider } from './components/provider/storage-provider';
+import { StorProvider } from './components/providers/index';
+import { LoginForm } from './components/user/index';
 import { GlobalStyle } from './styles/index';
 
 function App() {

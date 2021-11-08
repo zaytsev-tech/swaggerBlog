@@ -2,8 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { useBoardContext } from '../../../context/board';
-import { Card } from '../../store/board';
-import { addNewComment } from '../../store/board/actions';
+import { addNewComment, Card } from '../../../store/board/index';
 
 interface CardProp {
   columnKey: string;
@@ -15,7 +14,7 @@ export const CardComments: FC<CardProp> = ({ columnKey, card }) => {
   const [active, setActive] = useState(false);
   const [textComment, setTextComment] = useState('');
 
-  const checkEmptyInput = () => {
+  const blurCheckInput = () => {
     if (textComment === '') {
       setActive(false);
     }
@@ -41,24 +40,22 @@ export const CardComments: FC<CardProp> = ({ columnKey, card }) => {
       <p>Comments</p>
       <BasicCommentBlock>
         <UserAvatar>{state.name.split('', 1)}</UserAvatar>
-        <InputCommentBlock>
+        <InputBlock>
           {!active ? (
-            <InputCommentP onClick={() => setActive(true)}>
-              Write a comment...
-            </InputCommentP>
+            <InputP onClick={() => setActive(true)}>Write a comment...</InputP>
           ) : (
             <>
-              <InputCommentTA
+              <InputTA
                 placeholder="Write a comment..."
                 value={textComment}
                 autoFocus
                 onChange={(e) => setTextComment(e.target.value)}
-                onBlur={checkEmptyInput}
+                onBlur={blurCheckInput}
               />
               <button onClick={saveComment}>Save</button>
             </>
           )}
-        </InputCommentBlock>
+        </InputBlock>
       </BasicCommentBlock>
     </CommentsContainer>
   );
@@ -87,7 +84,7 @@ const BasicCommentBlock = styled.div`
   height: 50px;
 `;
 
-const InputCommentBlock = styled.div`
+const InputBlock = styled.div`
   position: relative;
   display: inline-block;
   margin-left: 5px;
@@ -97,12 +94,12 @@ const InputCommentBlock = styled.div`
   max-width: 400px;
 `;
 
-const InputCommentP = styled.p`
+const InputP = styled.p`
   margin: 5px;
   font-size: 0.9em;
 `;
 
-const InputCommentTA = styled.textarea`
+const InputTA = styled.textarea`
   width: -webkit-fill-available !important;
   outline: none;
   border: none;

@@ -2,8 +2,8 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from '../../../portal';
+import { Card } from '../../../store/board/index';
 import { PopupBg } from '../../login/login-form';
-import { Card } from '../../store/board';
 import { CardComments } from './card-comments';
 import { CardDescription } from './card-description';
 import { CardHeader } from './card-header';

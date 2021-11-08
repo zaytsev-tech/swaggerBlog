@@ -1,8 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 
 import { useBoardContext } from '../../../context/board';
-import { Column } from '../../store/board';
-import { setHeaderColumnName } from '../../store/board/actions';
+import { Column, setHeaderColumnName } from '../../../store/board/index';
 
 interface ColumnHeaderProps {
   column: Column;

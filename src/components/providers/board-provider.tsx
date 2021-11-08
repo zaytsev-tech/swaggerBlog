@@ -1,9 +1,7 @@
 import { FC, useEffect, useReducer } from 'react';
 
 import { BoardContext } from '../../context/board/index';
-import { userStorageReducer } from '../store/board/index';
-import { Initializer } from '../store/board/init';
-import { initialState } from '../store/board/state';
+import { Initializer, initialState, userStorageReducer } from '../../store/board/index';
 
 export const StorProvider: FC = ({ children }) => {
   const stateDispatchStorage = useReducer(userStorageReducer, initialState, Initializer);

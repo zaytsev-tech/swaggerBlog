@@ -2,8 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { useBoardContext } from '../../../context/board';
-import { Card, selectColumnName } from '../../store/board';
-import { setNameCard } from '../../store/board/index';
+import { Card, selectColumnName, setNameCard } from '../../../store/board/index';
 
 interface CardProp {
   columnKey: string;
@@ -16,7 +15,7 @@ export const CardHeader: FC<CardProp> = ({ columnKey, card, close }) => {
   const [active, setActive] = useState(false);
   const [nameCard, setName] = useState(card.name);
 
-  const innerHeader = () => {
+  const blurInnerHeader = () => {
     if (nameCard !== '') {
       const cardKey = card.key;
       dispatch(setNameCard({ columnId: columnKey, cardId: cardKey, value: nameCard }));
@@ -36,7 +35,7 @@ export const CardHeader: FC<CardProp> = ({ columnKey, card, close }) => {
           value={nameCard}
           autoFocus
           onChange={(e) => setName(e.target.value)}
-          onBlur={innerHeader}
+          onBlur={blurInnerHeader}
         ></HeaderContainerInput>
       )}
       <HeaderContainerP>in column {selectColumnName(state, columnKey)}</HeaderContainerP>

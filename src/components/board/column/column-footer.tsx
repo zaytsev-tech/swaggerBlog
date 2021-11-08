@@ -2,8 +2,7 @@ import { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import styled from 'styled-components';
 
 import { useBoardContext } from '../../../context/board';
-import { Column } from '../../store/board';
-import { addNewCard } from '../../store/board/actions';
+import { addNewCard, Column } from '../../../store/board/index';
 
 interface ColumnFooterProps {
   column: Column;

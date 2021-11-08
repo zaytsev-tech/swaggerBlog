@@ -2,9 +2,7 @@ import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { useBoardContext } from '../../../context/board';
-import { Card } from '../../store/board';
-import { setDescription } from '../../store/board/actions';
-import { selectCardField } from '../../store/board/selectors';
+import { Card, selectCardField, setDescription } from '../../../store/board/index';
 
 interface CardProp {
   columnKey: string;
@@ -21,7 +19,7 @@ export const CardDescription: FC<CardProp> = ({ columnKey, card }) => {
     setActive(false);
   };
 
-  const cancelInputChanges = () => {
+  const mousedownCancelChanges = () => {
     setTextDesc(
       selectCardField(
         state,
@@ -62,7 +60,7 @@ export const CardDescription: FC<CardProp> = ({ columnKey, card }) => {
           ></DescriptionContainerTA>
           <ControllerTA>
             <ControllerButtonTA onClick={innerText}>Save</ControllerButtonTA>
-            <ControllerCloseTA onMouseDown={cancelInputChanges}>X</ControllerCloseTA>
+            <ControllerCloseTA onMouseDown={mousedownCancelChanges}>X</ControllerCloseTA>
           </ControllerTA>
         </div>
       )}

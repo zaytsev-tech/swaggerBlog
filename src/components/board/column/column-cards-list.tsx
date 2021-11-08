@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { Column } from '../../store/board/index';
+import { Column } from '../../../store/board/index';
 import { ColumnCard } from './column-card';
 
 interface CardsProps {

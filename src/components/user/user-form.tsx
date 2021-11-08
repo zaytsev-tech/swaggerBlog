@@ -2,9 +2,9 @@ import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 
 import { useBoardContext } from '../../context/board/index';
-import { setUsername } from '../store/board/index';
+import { setUsername } from '../../store/board/index';
 
-function LoginForm() {
+function UserForm() {
   const [state, dispatch] = useBoardContext();
   const [name, setName] = useState(state.name);
   const [active, setActive] = useState(true);
@@ -26,12 +26,12 @@ function LoginForm() {
 
   return (
     <PopupBg $active={active}>
-      <LoginContainer>
-        <LoginContainerForm onSubmit={onSubmitForm}>
+      <UserContainer>
+        <ContainerForm onSubmit={onSubmitForm}>
           <div>
             <label>
               Ваше имя:
-              <LoginFormInput
+              <FormInput
                 type="text"
                 name="login"
                 value={name}
@@ -40,15 +40,15 @@ function LoginForm() {
             </label>
           </div>
           <div>
-            <LoginFormInput type="submit" value="Войти" />
+            <FormInput type="submit" value="Войти" />
           </div>
-        </LoginContainerForm>
-      </LoginContainer>
+        </ContainerForm>
+      </UserContainer>
     </PopupBg>
   );
 }
 
-const LoginContainer = styled.div`
+const UserContainer = styled.div`
   display: block;
   position: relative;
   border-radius: 12px;
@@ -61,14 +61,14 @@ const LoginContainer = styled.div`
   overflow-y: auto;
 `;
 
-const LoginContainerForm = styled.form`
+const ContainerForm = styled.form`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
 
-const LoginFormInput = styled.input`
+const FormInput = styled.input`
   margin: 5px;
 `;
 
@@ -88,4 +88,4 @@ export const PopupBg = styled('div')<{ $active: boolean }>`
   pointer-events: ${(props) => (props.$active ? `all` : `none`)};
 `;
 
-export default LoginForm;
+export default UserForm;
